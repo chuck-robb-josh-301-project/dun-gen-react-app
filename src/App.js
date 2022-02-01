@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import {withAuth0} from '@auth0/auth0-react';
+import React from 'react';
+import LoginButton from './LoginButton.js';
+import LogoutButton from './LogoutButton.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <>
+      <h1>Dun.Gen()</h1>
+      {this.props.auth0.isAuthenticated ? <LogoutButton/> : <LoginButton/>}
+      </>
+    )
+  }
 }
 
-export default App;
+export default withAuth0(App);
+
