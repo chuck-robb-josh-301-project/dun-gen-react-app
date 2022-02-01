@@ -65,3 +65,56 @@ writePageTwo();
 fullText += pageTwo;
 
 console.log(fullText);
+
+
+let chunkyDataArrSample = [{
+  "index": "androsphinx",
+  "name": "Androsphinx",
+  "url": "/api/monsters/androsphinx"
+},
+{
+  "index": "animated-armor",
+  "name": "Animated Armor",
+  "url": "/api/monsters/animated-armor"
+},
+{
+  "index": "ankheg",
+  "name": "Ankheg",
+  "url": "/api/monsters/ankheg"
+},
+{
+  "index": "ape",
+  "name": "Ape",
+  "url": "/api/monsters/ape"
+},
+{
+  "index": "archmage",
+  "name": "Archmage",
+  "url": "/api/monsters/archmage"
+},
+{
+  "index": "assassin",
+  "name": "Assassin",
+  "url": "/api/monsters/assassin"
+},
+{
+  "index": "awakened-shrub",
+  "name": "Awakened Shrub",
+  "url": "/api/monsters/awakened-shrub"
+},
+{
+  "index": "awakened-tree",
+  "name": "Awakened Tree",
+  "url": "/api/monsters/awakened-tree"
+}];
+
+let rollMonsterLarge = () => {
+  let sizeCheckArr = chunkyDataArrSample;
+  let grabbed = false;
+  while (grabbed === false) {
+   let rolledIdx = getRandomInt(sizeCheckArr.length);
+    if (sizeCheckArr[rolledIdx]) {
+      
+    }
+  }
+}
