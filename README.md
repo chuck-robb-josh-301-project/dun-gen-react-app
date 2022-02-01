@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# ${Team Name} Team Agreement
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Cooperation Plan
 
-## Available Scripts
+### Team Strengths and Growth Targets
 
-In the project directory, you can run:
+* Robb Alexander:
+	* Strengths: Writing, communication, proofreading, loop logic, 
+	* Growth: Results Proficiency, Craft (Managing component inheritance)
+* Chuck Altopiedi: 
+	* Strengths: Listening, inclusion, API call logic & grooming,
+	* Growth: Tools, Technical Proficiencies
+* Josh McCluskey:
+	* Strengths: Growth Mindset, Business acumen, React
+	* Growth: Communication, ...React
+* Whole Team: Regex!,
 
-### `npm start`
+### Day-to-Day Plan
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* (Remo) Hours: 9:00AM – 6:00PM PST (1 hour lunch, variable time)
+	* **No coding after hours** (barring contingency discussions)
+* Breaks: At-will, averaging 10 minutes per hour worked
+* Merge Parties: Before lunch & End-of-day (or extenuating circumstances)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Project Management
 
-### `npm test`
+* Trello board
+* Communication methods:
+	* Remo (during work hours)
+	* Slack (availability but not expectation after-hours)
+* Work division: All members will identify 1+ growth area(s) and 1+ strength area(s) to improve upon or show off with, respectively, and be responsible for those features.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Git Flow
 
-### `npm run build`
+* Don’t merge your own PR’s (required reviews in GitHub settings)
+* Separate tasks by front/back and by file when possible to limit conflicts
+* Branches:
+	* Naming convention: `{dev first initial}-{day of week 1st 2 letters}-{feature}-{#}`
+* Merge Parties: Before lunch & End-of-day (or extenuating circumstances)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Catch-up Contingencies (OSP’s)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* All members willing to accept longer work days as necessary if MVP is behind schedule
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Conflict Plan
 
-### `npm run eject`
+* Vote on timeline/feature divergence from plan
+* Hearing differing opinions is **required**-- point out if a comment has been missed or forgotten
+* Emergency plan: contact Ryan for any irreconcilable differences
+* Project Mission Statement: This project is first and foremost a learning experience – team member growth is the priority over end results.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Domain Modeling and Database Schema Diagram
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Domain Modeling and Schema Diagram](/img/dom-data-schema-two.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Wireframe
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![Wireframe Design](/img/wireframe.png)
