@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Accordion, Card, Container, Button, Dropdown, Modal, Form } from 'react-bootstrap';
+import { Accordion, Card, Container, Button, Modal, Form } from 'react-bootstrap';
 import { withAuth0 } from '@auth0/auth0-react';
 
 
@@ -117,9 +117,12 @@ class HeroSelector extends React.Component {
     e.preventDefault();
     let newHero = {
       name: e.target.name.value,
-      // pronoun: e.target.pronoun,
-      race: e.target.race, 
-      class: e.target.class,
+      // pronouns: JSON.parse(e.target.pronouns.value),
+      race: e.target.race.value, 
+      class: e.target.class.value,
+      villageName: e.target.villageName.value,
+      email: this.props.auth0.user.email,
+      progress: 1,
     }
     this.handleCloseModal();
     console.log(newHero);
@@ -136,7 +139,7 @@ class HeroSelector extends React.Component {
         <Accordion.Body>
           {hero.race}
           {hero.class}
-          {hero.origin}
+          {hero.villageName}
           {hero.progress}
           {hero.background}
           <Button variant="primary" onClick={() => this.setState({ currentHero: hero })}>Load</Button>
@@ -157,7 +160,7 @@ class HeroSelector extends React.Component {
               <Accordion>
                 {herosToRender}
               </Accordion>
-              <Button onClick={this.handleModal}>Creat New Hero</Button>
+              <Button onClick={this.handleModal}>Create New Hero</Button>
             </Card.Body>
           </Card>
         </Container>
@@ -180,33 +183,37 @@ class HeroSelector extends React.Component {
                   <Form.Label>Give Your Hero a Name!</Form.Label>
                   <Form.Control type="text" />
                 </Form.Group>
-                
-                <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">Choose Pronoun</Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1">He, Him, his</Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">She, Her, Hers </Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">They, Them, Theirs</Dropdown.Item>                 
-                </Dropdown.Menu>
-              </Dropdown>
-              <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">Choose Race</Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1">some template literal</Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">some template literal</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">some template literal</Dropdown.Item>
-                  <Dropdown.Item href="#/action-4">some template literal</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-              <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">Choose Class</Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1">some template literal</Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">some template literal</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">some template literal</Dropdown.Item>
-                  <Dropdown.Item href="#/action-4">some template literal</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+                <Form.Group controlId="villageName">
+                  <Form.Label>Enter your Hometown!</Form.Label>
+                  <Form.Control type="text" />
+                </Form.Group>
+
+
+                <Form.Group controlId="class">
+                <Form.Select  >
+                  <option value="0">Choose a class</option>
+                  <option value="">fighter</option>
+                  <option value="2">wizard</option>
+                  <option value="3">rogue</option>
+                </Form.Select>
+                </Form.Group>
+              
+                <Form.Group controlId="race">
+                <Form.Select  >
+                  <option value="0">Choose a Race</option>
+                  <option value="1">human</option>
+                  <option value="2">elf</option>
+                  <option value="3">dragonborn</option>
+                </Form.Select>
+                </Form.Group>
+                {/* <Form.Group controlId="pronouns">
+                <Form.Select  >
+                  <option value="0">Choose pronouns</option>
+                  <option value="He, Him, His">He, Him, His</option>
+                  <option value="[She, Her, Hers]">She, Her, Hers</option>
+                  <option value="[They, Them, Theirs]">They, Them, Theirs</option>
+                </Form.Select>
+                </Form.Group> */}
                   <Button type="submit">Create!</Button>
                 
               </Form>
