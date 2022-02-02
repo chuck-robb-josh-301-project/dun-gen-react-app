@@ -91,6 +91,8 @@ class HeroSelector extends React.Component {
     e.preventDefault();
     let heroUpdate = {
       name: e.target.name.value || this.state.currentHero.name,
+      race: e.target.race.value || this.state.currentHero.race,
+      class: e.target.class.value || this.state.currentHero.class,
       origin: e.target.origin.value || this.state.currentHero.origin,
       background: e.target.background.checked || this.state.currentHero.background,
       progress: e.target.progress.value || this.state.currentHero.progress,
@@ -107,13 +109,29 @@ class HeroSelector extends React.Component {
     this.getHerosInfo();
   }
 
+  handleHeroSubmit = (e) => {
+    e.preventDefault();
+    let newHero = {
+      name: e.target.name.value,
+      // pronoun: e.target.pronoun,
+      race: e.target.race, 
+      class: e.target.class,
+    }
+    this.handleCloseModal();
+    console.log(newHero);
+    this.makeHero(newHero);
+  }
+
   render() {
     console.log(this.props.auth0.user)
+    
     let herosToRender = this.state.heros.map((hero, idx) =>
 
       <Accordion.Item key={idx} eventKey={idx}>
-        <Accordion.Header>{hero.name}</Accordion.Header>
+        <Accordion.Header><h2>{hero.name}</h2></Accordion.Header>
         <Accordion.Body>
+          {hero.race}
+          {hero.class}
           {hero.origin}
           {hero.progress}
           {hero.background}
@@ -143,18 +161,27 @@ class HeroSelector extends React.Component {
             onHide={this.handleCloseModal}
             centered
             size="xl"
+            
           >
 
             <Modal.Header closeButton>
               <Modal.Title>Create Your Hero</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Form>
-                <Form.Group>
+              <Form onSubmit={this.handleHeroSubmit}>
+                <Form.Group controlId="name">
                   <Form.Label>Give Your Hero a Name!</Form.Label>
-                  <Form.Control type="text" placeholder="Type Name Here" />
+                  <Form.Control type="text" />
                 </Form.Group>
-              </Form>
+                
+                <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">Choose Pronoun</Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item href="#/action-1">He, Him, his</Dropdown.Item>
+                  <Dropdown.Item href="#/action-2">She, Her, Hers </Dropdown.Item>
+                  <Dropdown.Item href="#/action-3">They, Them, Theirs</Dropdown.Item>                 
+                </Dropdown.Menu>
+              </Dropdown>
               <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">Choose Race</Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -173,9 +200,11 @@ class HeroSelector extends React.Component {
                   <Dropdown.Item href="#/action-4">some template literal</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
+                  <Button type="submit">Create!</Button>
+                
+              </Form>
             </Modal.Body>
             <Modal.Footer>
-              <Button>Create!</Button>
               <Button onClick={this.handleCloseModal}>Close</Button>
             </Modal.Footer>
 
