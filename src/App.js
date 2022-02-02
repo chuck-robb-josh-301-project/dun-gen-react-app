@@ -4,10 +4,13 @@ import LoginButton from './LoginButton.js';
 import LogoutButton from './LogoutButton.js';
 import HeroSelector from './HeroSelector.js';
 import { Container } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './Header';
 import './App.css'
+// import Book1 from './img/book1.png';
 
-
+// let backgroundImg = {
+//   backgroungImage: `url(${Book1})`
+// }
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +23,7 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <h1>Dun.Gen()</h1>
+        <Header/>
         {this.props.auth0.isAuthenticated ? <LogoutButton /> : <LoginButton />}
         {this.props.auth0.isAuthenticated ? <h2>Welcome {this.props.auth0.user.given_name} !</h2> : <h2>Please Log In!</h2>}
         {this.props.auth0.isAuthenticated ?
