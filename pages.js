@@ -1,10 +1,17 @@
 
+
+
+// let hero = this.state.currentHero;
+// let hero = this.props.currentHero;
+
 const testHero = {
   name: 'Testy',
   progress: '',
   race: 'troll',
   class: 'coder',
 };
+
+
 
 let prologueOneA = `This is sample text about where ${testHero.name} came from, their(SG-pronouns?) motivations, or some such. ${testHero.name} is a ${testHero.race} working as a ${testHero.class} to get by in between adventures-- living treasure-chest-to-treasure-chest`;
 
