@@ -1,5 +1,6 @@
 import { withAuth0 } from '@auth0/auth0-react';
 import React from 'react';
+import axios from 'axios';
 import LoginButton from './LoginButton.js';
 import LogoutButton from './LogoutButton.js';
 import HeroSelector from './HeroSelector.js';
@@ -7,14 +8,39 @@ import { Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 
+const urlApi = `https://www.dnd5eapi.co/api`;
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // showModal: false
+      classData: {},
+      renderError: false,
     }
   }
+
+
+  getHero = async () => {
+    try { 
+      let heroClass = await axios.get(`${urlApi}/classes`);
+      this.setState({
+        classData: heroClass,
+
+      })
+    } catch (error) {
+      this.setState({
+        renderError: true,
+        errorMessage: `Uh Oh Error: ${error.response.status}, ${error.response.data.error}`
+      })
+    }
+  }
+
+
+
+
+
+
+
 
 
   render() {
