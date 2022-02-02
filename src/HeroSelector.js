@@ -4,7 +4,11 @@ import { Accordion, Card, Container, Button, Dropdown, Modal, Form } from 'react
 import { withAuth0 } from '@auth0/auth0-react';
 
 
+import Book1 from './img/book1.png';
 
+let background = {
+  backgroungImage: `url(${Book1})`
+}
 const SERVER = process.env.REACT_APP_SERVER_URL;
 
 class HeroSelector extends React.Component {
@@ -141,9 +145,12 @@ class HeroSelector extends React.Component {
       </Accordion.Item>
 
     )
-
+    console.log('This the current Hero',this.state.currentHero)
     return (
       <>
+      <div style={{ backgroundImage: `url(${background})` }}>
+  
+
         <Container>
           <Card>
             <Card.Body>
@@ -210,6 +217,7 @@ class HeroSelector extends React.Component {
 
           </Modal>
         </Container>
+        </div>
       </>
 
     )
