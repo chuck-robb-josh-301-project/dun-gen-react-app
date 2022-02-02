@@ -22,7 +22,7 @@ class App extends React.Component {
       <>
         <h1>Dun.Gen()</h1>
         {this.props.auth0.isAuthenticated ? <LogoutButton /> : <LoginButton />}
-        {this.props.auth0.isAuthenticated ? <h2>Good Morning Chuck!</h2> : <h2>Please Log In!</h2>}
+        {this.props.auth0.isAuthenticated ? <h2>Welcome {this.props.auth0.user.given_name} !</h2> : <h2>Please Log In!</h2>}
         {this.props.auth0.isAuthenticated ?
         <Container>
           <HeroSelector/>
