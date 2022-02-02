@@ -6,6 +6,7 @@ import { Auth0Provider } from '@auth0/auth0-react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 ReactDOM.render(
   <Auth0Provider
     domain={process.env.REACT_APP_AUTH_DOMAIN}
