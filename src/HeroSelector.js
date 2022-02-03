@@ -9,9 +9,58 @@ import cave from './img/16279.jpg'
 import swamp from './img/2202.jpg'
 import bridge from './img/bridge-19513.jpg'
 import forest from './img/forest-4099730.jpg'
-import stairs from './img/stairs2.jpg'
+import village from './img/village.jpg'
+import d1 from "./img/d1.png"
+import d2 from "./img/d2.png"
+import d3 from "./img/d3.png"
+import d4 from "./img/d4.png"
+import d5 from "./img/d5.png"
+import d6 from "./img/d6.png"
+import d7 from "./img/d7.png"
+import d8 from "./img/d8.png"
+import d9 from "./img/d9.png"
+import d10 from "./img/d10.png"
+import d11 from "./img/d11.png"
+import d12 from "./img/d12.png"
+import d13 from "./img/d13.png"
+import d14 from "./img/d14.png"
+import d15 from "./img/d15.png"
+import d16 from "./img/d16.png"
+import d17 from "./img/d17.png"
+import d18 from "./img/d18.png"
+import d19 from "./img/d19.png"
+import d20 from "./img/d20.png"
 
+const imageObject = {
+  forest, 
+  cave,  
+  swamp,
+  bridge,
+  village
+}
 
+const diceObject = {
+  d1,
+  d2, 
+  d3,
+  d4, 
+  d5,
+  d6,
+  d7,
+  d8,
+  d9,
+  d10,
+  d11,
+  d12,
+  d13,
+  d14,
+  d15,
+  d16,
+  d17,
+  d18,
+  d19,
+  d20 
+}
 
 
 const SERVER = process.env.REACT_APP_SERVER_URL;
@@ -25,8 +74,33 @@ class HeroSelector extends React.Component {
       showModal: false,
       showGameCard: false,
       showAccCard: true,
+      imageSrc: '',
+      location: 'village',
+      diceImgSrc: '',
+      randDieNum: 'd18',
+      showDieImg: false,
     }
   }
+
+  handleImgChange = () => {
+    this.setState({
+      imageSrc: imageObject[this.state.location]
+    })      
+}
+
+  handleDieImgChange = () => {
+    this.setState({
+      diceImgSrc: diceObject[this.state.randDieNum]
+    })
+  }
+
+  handleRollDie = () => {
+    this.setState({
+      showDieImg: true
+    })
+  }
+    
+      
 
   handleModal = (e) => {
     e.preventDefault();
@@ -126,6 +200,9 @@ class HeroSelector extends React.Component {
 
   componentDidMount() {
     this.getHerosInfo();
+    // remove handleImgChange
+    this.handleImgChange();
+    this.handleDieImgChange();
   }
 
   handleHeroSubmit = (e) => {
@@ -147,6 +224,7 @@ class HeroSelector extends React.Component {
   render() {
     console.log(this.props.auth0.user)
 
+    
     let herosToRender = this.state.heros.map((hero, idx) =>
 
       <Accordion.Item key={idx} eventKey={idx}>
@@ -243,15 +321,22 @@ class HeroSelector extends React.Component {
       { 
         this.state.showGameCard &&
         <Container >       
-            <Card className="gameCard">
+            <Card className="gameCard" >
               <Card.Body>
                 <Card.Img
-                  src={forest}
-                  alt='a book'
+                  src={this.state.imageSrc}
                   />
                 <Card.ImgOverlay className="gameCardText">
                   <Card.Title>Please Work</Card.Title>
                   <Card.Text>{this.state.currentHero.name}</Card.Text>
+                {
+                this.state.showDieImg &&
+                <Card.Img
+                  src={this.state.diceImgSrc}
+                  className="dieImg"
+                  />
+                }
+                <Button onClick={this.handleRollDie}>Roll!</Button>  
                 </Card.ImgOverlay>
               </Card.Body>
             </Card>          
