@@ -25,6 +25,7 @@ class HeroSelector extends React.Component {
       showModal: false,
       showGameCard: false,
       showAccCard: true,
+      showHero: false
     }
   }
 
@@ -47,6 +48,7 @@ class HeroSelector extends React.Component {
     this.setState({
       showGameCard: true,
       showAccCard: false,
+      showHero: false
     })
   }
 
@@ -138,6 +140,7 @@ class HeroSelector extends React.Component {
       villageName: e.target.villageName.value,
       email: this.props.auth0.user.email,
       progress: 1,
+      health: 25
     }
     this.handleCloseModal();
     console.log(newHero);
@@ -157,7 +160,7 @@ class HeroSelector extends React.Component {
           {hero.villageName}
           {hero.progress}
           {hero.background}
-          <Button variant="primary" onClick={() => this.setState({ currentHero: hero })}>Load</Button>
+          <Button variant="primary" onClick={() => this.setState({ currentHero: hero, showHero: true })}>Load</Button>
           <Button variant="danger" onClick={() => this.deleteHero(hero._id)}>Delete</Button>
         </Accordion.Body>
       </Accordion.Item>
@@ -167,21 +170,26 @@ class HeroSelector extends React.Component {
     return (
       <>
 
-      {
-        this.state.showAccCard &&
-        
-        <Container>
-          <Card className="cardClass">
-            <Card.Body>
-              <Accordion className="accord">
-                {herosToRender}
-              </Accordion>
-              <Button onClick={this.handleModal}>Create New Hero</Button>
-              <Button onClick={this.renderCard}>Start Game</Button>
-            </Card.Body>
-          </Card>
-        </Container>
+        {
+          this.state.showHero &&
+          <h2>{this.props.auth0.user.given_name} selected {this.state.currentHero.name}</h2>
         }
+        {
+          this.state.showAccCard &&
+
+          <Container>
+            <Card className="cardClass">
+              <Card.Body>
+                <Accordion className="accord">
+                  {herosToRender}
+                </Accordion>
+                <Button onClick={this.handleModal}>Create New Hero</Button>
+                <Button onClick={this.renderCard}>Start Game</Button>
+              </Card.Body>
+            </Card>
+          </Container>
+        }
+
 
         <Container>
           <Modal
@@ -240,23 +248,23 @@ class HeroSelector extends React.Component {
 
           </Modal>
         </Container>
-      { 
-        this.state.showGameCard &&
-        <Container >       
+        {
+          this.state.showGameCard &&
+          <Container >
             <Card className="gameCard">
               <Card.Body>
                 <Card.Img
                   src={forest}
                   alt='a book'
-                  />
+                />
                 <Card.ImgOverlay className="gameCardText">
                   <Card.Title>Please Work</Card.Title>
                   <Card.Text>{this.state.currentHero.name}</Card.Text>
                 </Card.ImgOverlay>
               </Card.Body>
-            </Card>          
-        </Container>
-      }
+            </Card>
+          </Container>
+        }
 
       </>
 
