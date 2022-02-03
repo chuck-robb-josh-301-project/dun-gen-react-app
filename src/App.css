@@ -1,7 +1,26 @@
-.App {
+/* .App {
   text-align: center;
   background-image: url('./img/book1.png');
+} */
+
+body {
+  background-image: url('../img/book1.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+
 }
 
+.welcome {
+  color: whitesmoke;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  
+  
+}
 
+h1 {
+  margin-left: 33%;
+  padding-top: 5%; 
+  font-size: 4vw;
+  font-family: 'Press Start 2P', cursive;
+}
 
