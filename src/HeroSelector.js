@@ -50,6 +50,7 @@ class HeroSelector extends React.Component {
       showAccCard: false,
       showHero: false
     })
+    this.props.getAllThings();
   }
 
   getHerosInfo = async () => {
