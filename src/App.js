@@ -326,7 +326,6 @@ class App extends React.Component {
           {this.props.auth0.isAuthenticated ? <h2 className="welcome">Welcome {this.props.auth0.user.given_name} !</h2> : <h2>Please Log In!</h2>}
           {this.props.auth0.isAuthenticated ?
             <Container>
-              <Button onClick={this.loadWeapon()}>Get All Things</Button>
               <HeroSelector getAllThings={this.getAllThings}/>
             </Container>
             : <h2></h2>
