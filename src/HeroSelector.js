@@ -2,13 +2,18 @@ import React from 'react';
 import axios from 'axios';
 import { Accordion, Card, Container, Button, Modal, Form } from 'react-bootstrap';
 import { withAuth0 } from '@auth0/auth0-react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './HeroSelector.css'
+import bookPng from './img/book1.png'
+import cave from './img/16279.jpg'
+import swamp from './img/2202.jpg'
+import bridge from './img/bridge-19513.jpg'
+import forest from './img/forest-4099730.jpg'
+import stairs from './img/stairs2.jpg'
 
 
-import Book1 from './img/book1.png';
 
-let background = {
-  backgroungImage: `url(${Book1})`
-}
+
 const SERVER = process.env.REACT_APP_SERVER_URL;
 
 class HeroSelector extends React.Component {
@@ -17,7 +22,9 @@ class HeroSelector extends React.Component {
     this.state = {
       heros: [],
       currentHero: {},
-      showModal: false
+      showModal: false,
+      showGameCard: false,
+      showAccCard: true,
     }
   }
 
@@ -32,6 +39,14 @@ class HeroSelector extends React.Component {
   handleCloseModal = () => {
     this.setState({
       showModal: false
+    })
+  }
+
+  renderCard = (e) => {
+    e.preventDefault();
+    this.setState({
+      showGameCard: true,
+      showAccCard: false,
     })
   }
 
@@ -118,7 +133,7 @@ class HeroSelector extends React.Component {
     let newHero = {
       name: e.target.name.value,
       // pronouns: JSON.parse(e.target.pronouns.value),
-      race: e.target.race.value, 
+      race: e.target.race.value,
       class: e.target.class.value,
       villageName: e.target.villageName.value,
       email: this.props.auth0.user.email,
@@ -131,12 +146,12 @@ class HeroSelector extends React.Component {
 
   render() {
     console.log(this.props.auth0.user)
-    
+
     let herosToRender = this.state.heros.map((hero, idx) =>
 
       <Accordion.Item key={idx} eventKey={idx}>
         <Accordion.Header><h2>{hero.name}</h2></Accordion.Header>
-        <Accordion.Body>
+        <Accordion.Body className="accbod">
           {hero.race}
           {hero.class}
           {hero.villageName}
@@ -148,22 +163,25 @@ class HeroSelector extends React.Component {
       </Accordion.Item>
 
     )
-    console.log('This the current Hero',this.state.currentHero)
+    console.log('This the current Hero', this.state.currentHero)
     return (
       <>
-      <div style={{ backgroundImage: `url(${background})` }}>
-  
 
+      {
+        this.state.showAccCard &&
+        
         <Container>
-          <Card>
+          <Card className="cardClass">
             <Card.Body>
-              <Accordion>
+              <Accordion className="accord">
                 {herosToRender}
               </Accordion>
               <Button onClick={this.handleModal}>Create New Hero</Button>
+              <Button onClick={this.renderCard}>Start Game</Button>
             </Card.Body>
           </Card>
         </Container>
+        }
 
         <Container>
           <Modal
@@ -171,7 +189,8 @@ class HeroSelector extends React.Component {
             onHide={this.handleCloseModal}
             centered
             size="xl"
-            
+            className="modalClass"
+
           >
 
             <Modal.Header closeButton>
@@ -180,31 +199,28 @@ class HeroSelector extends React.Component {
             <Modal.Body>
               <Form onSubmit={this.handleHeroSubmit}>
                 <Form.Group controlId="name">
-                  <Form.Label>Give Your Hero a Name!</Form.Label>
+                  <Form.Label >Give Your Hero a Name!</Form.Label>
                   <Form.Control type="text" />
                 </Form.Group>
                 <Form.Group controlId="villageName">
-                  <Form.Label>Enter your Hometown!</Form.Label>
+                  <Form.Label className="forms">Enter your Hometown!</Form.Label>
                   <Form.Control type="text" />
                 </Form.Group>
-
-
                 <Form.Group controlId="class">
-                <Form.Select  >
-                  <option value="0">Choose a class</option>
-                  <option value="">fighter</option>
-                  <option value="2">wizard</option>
-                  <option value="3">rogue</option>
-                </Form.Select>
+                  <Form.Select className="forms" >
+                    <option value="0">Choose a class</option>
+                    <option value="Fighter">fighter</option>
+                    <option value="Wizard">wizard</option>
+                    <option value="Rogue">rogue</option>
+                  </Form.Select>
                 </Form.Group>
-              
                 <Form.Group controlId="race">
-                <Form.Select  >
-                  <option value="0">Choose a Race</option>
-                  <option value="1">human</option>
-                  <option value="2">elf</option>
-                  <option value="3">dragonborn</option>
-                </Form.Select>
+                  <Form.Select className="forms2" >
+                    <option value="0">Choose a Race</option>
+                    <option value="Human">human</option>
+                    <option value="Elf">elf</option>
+                    <option value="Dragonborn">dragonborn</option>
+                  </Form.Select>
                 </Form.Group>
                 {/* <Form.Group controlId="pronouns">
                 <Form.Select  >
@@ -214,8 +230,8 @@ class HeroSelector extends React.Component {
                   <option value="[They, Them, Theirs]">They, Them, Theirs</option>
                 </Form.Select>
                 </Form.Group> */}
-                  <Button type="submit">Create!</Button>
-                
+                <Button type="submit">Create!</Button>
+
               </Form>
             </Modal.Body>
             <Modal.Footer>
@@ -224,7 +240,24 @@ class HeroSelector extends React.Component {
 
           </Modal>
         </Container>
-        </div>
+      { 
+        this.state.showGameCard &&
+        <Container >       
+            <Card className="gameCard">
+              <Card.Body>
+                <Card.Img
+                  src={forest}
+                  alt='a book'
+                  />
+                <Card.ImgOverlay className="gameCardText">
+                  <Card.Title>Please Work</Card.Title>
+                  <Card.Text>{this.state.currentHero.name}</Card.Text>
+                </Card.ImgOverlay>
+              </Card.Body>
+            </Card>          
+        </Container>
+      }
+
       </>
 
     )

@@ -8,6 +8,7 @@ import { Container, Button } from 'react-bootstrap';
 import Header from './Header';
 import './App.css'
 // import Book1 from './img/book1.png';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const urlApi = `https://www.dnd5eapi.co`;
@@ -44,7 +45,8 @@ class App extends React.Component {
       renderError: false,
     }
   }
-  
+
+
   //Getting list of monsters
   getMonsters = async () => {
     try {
@@ -298,6 +300,7 @@ loadSkill = async () => {
 
   render() {
     return (
+
       <>
         <Header />
         {this.props.auth0.isAuthenticated ? <LogoutButton /> : <LoginButton />}
@@ -324,6 +327,23 @@ loadSkill = async () => {
         }
 
       </>
+
+      <body>
+
+        <>
+          <Header className="headClass"/>
+          {this.props.auth0.isAuthenticated ? <LogoutButton /> : <LoginButton />}
+          {this.props.auth0.isAuthenticated ? <h2 className="welcome">Welcome {this.props.auth0.user.given_name}!</h2> : <h2>Please Log In!</h2>}
+          {this.props.auth0.isAuthenticated ?
+            <Container>
+              <HeroSelector />
+            </Container>
+            : <h2></h2>
+          }
+
+        </>
+      </body>
+
     )
   }
 }
