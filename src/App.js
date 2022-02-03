@@ -4,7 +4,7 @@ import axios from 'axios';
 import LoginButton from './LoginButton.js';
 import LogoutButton from './LogoutButton.js';
 import HeroSelector from './HeroSelector.js';
-import { Container, Button } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import Header from './Header';
 import './App.css'
 // import Book1 from './img/book1.png';
