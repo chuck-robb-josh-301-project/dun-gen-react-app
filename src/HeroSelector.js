@@ -9,9 +9,58 @@ import cave from './img/16279.jpg'
 import swamp from './img/2202.jpg'
 import bridge from './img/bridge-19513.jpg'
 import forest from './img/forest-4099730.jpg'
-import stairs from './img/stairs2.jpg'
+import village from './img/village.jpg'
+import d1 from "./img/d1.png"
+import d2 from "./img/d2.png"
+import d3 from "./img/d3.png"
+import d4 from "./img/d4.png"
+import d5 from "./img/d5.png"
+import d6 from "./img/d6.png"
+import d7 from "./img/d7.png"
+import d8 from "./img/d8.png"
+import d9 from "./img/d9.png"
+import d10 from "./img/d10.png"
+import d11 from "./img/d11.png"
+import d12 from "./img/d12.png"
+import d13 from "./img/d13.png"
+import d14 from "./img/d14.png"
+import d15 from "./img/d15.png"
+import d16 from "./img/d16.png"
+import d17 from "./img/d17.png"
+import d18 from "./img/d18.png"
+import d19 from "./img/d19.png"
+import d20 from "./img/d20.png"
 
+const imageObject = {
+  forest, 
+  cave,  
+  swamp,
+  bridge,
+  village
+}
 
+const diceObject = {
+  d1,
+  d2, 
+  d3,
+  d4, 
+  d5,
+  d6,
+  d7,
+  d8,
+  d9,
+  d10,
+  d11,
+  d12,
+  d13,
+  d14,
+  d15,
+  d16,
+  d17,
+  d18,
+  d19,
+  d20 
+}
 
 
 const SERVER = process.env.REACT_APP_SERVER_URL;
@@ -25,9 +74,35 @@ class HeroSelector extends React.Component {
       showModal: false,
       showGameCard: false,
       showAccCard: true,
+      imageSrc: '',
+      location: 'village',
+      diceImgSrc: '',
+      randDieNum: 'd18',
+      showDieImg: false,
       showHero: false
+
     }
   }
+
+  handleImgChange = () => {
+    this.setState({
+      imageSrc: imageObject[this.state.location]
+    })      
+}
+
+  handleDieImgChange = () => {
+    this.setState({
+      diceImgSrc: diceObject[this.state.randDieNum]
+    })
+  }
+
+  handleRollDie = () => {
+    this.setState({
+      showDieImg: true
+    })
+  }
+    
+      
 
   handleModal = (e) => {
     e.preventDefault();
@@ -129,6 +204,9 @@ class HeroSelector extends React.Component {
 
   componentDidMount() {
     this.getHerosInfo();
+    // remove handleImgChange
+    this.handleImgChange();
+    this.handleDieImgChange();
   }
 
   handleHeroSubmit = (e) => {
@@ -151,6 +229,7 @@ class HeroSelector extends React.Component {
   render() {
     console.log(this.props.auth0.user)
 
+    
     let herosToRender = this.state.heros.map((hero, idx) =>
 
       <Accordion.Item key={idx} eventKey={idx}>
@@ -249,26 +328,27 @@ class HeroSelector extends React.Component {
 
           </Modal>
         </Container>
-        {
-          this.state.showGameCard &&
-          <Container >
-            <Card className="gameCard">
+
+      { 
+        this.state.showGameCard &&
+        <Container >       
+            <Card className="gameCard" >
               <Card.Body>
                 <Card.Img
-                  src={forest}
-                  alt='a book'
-                />
+                  src={this.state.imageSrc}
+                  />
                 <Card.ImgOverlay className="gameCardText">
                   <Card.Title>Please Work</Card.Title>
-                  <Card.Text>{this.state.currentHero.name} ends another day on the outskirts of the village of Born in this simple cottage, as much a local as   neighbors,keeps to  Decades earlier, parents had been travellers and chose  to settle down in--though for reasons lost on $. Raised with the skills  parents learned elsewhere, finding work in the village was easy and aimless, but interactions were terse and just shy of hostile.\n
-                    $ awakes with a start to the smell of char. Smoke and shouting cloud $ mind for a few moments, then  rushes to get clothed and investigate.\n
-                    Following the noise,  
-                    Upon return,  sees only the buckling frame of $childhood home. A fit of grief sweeps through rage at the attackers, then suspicion at the neighbors, but settles into a dank quiet -- it was unlikely that the torch-wielding villagers would have lit the cottage other than in hapless desperation, though certainty found no purchase.\n
-                    "!" a voice calls as it crests the hill behind you. It is the village elder, weary and determined, lurching at an angle against some sharp farming implement and a back satchel. The elder eyes 's smoldering abode: "It seem we have both lost our ties to  this day." Taking stock of the chaos of the morning,  recalls the modest coloring on the clothing of several of the fallen among the drab of their fellows. "My remaining time was for my children, my remaining wealth for their children-to-be. If you can secure their justice, their inheritance will pay your way to a new home that is... more suitable for you. The elder reveals a solid case just large enough to still fit under an arm, weathered but with faint filigree still showing. "Do you assent, ?"\n
-                     nods  head silently, bereft of reasons not to.\n
-                    The elder scrapes an aged finger aganst the flat end of the bladed tool, pulling up a caked brown gunk-- perhaps blood, or something more sinister still-- and rubs it around the edge of the box's lid. Inaudible whispers and a series of arching hand gestures follow, until the seam of the case disappears from view, leaving uninterrupted patterns. The elder then hands over the case.
-                    "Our contract is signed into the bounty. You need not return if your task is done."\n
-                    With only the clothes on  back, some provisions from the elder, and the hardiest heirlooms that were salvaged from the fire,  leaves home for the first and final time.\n\n`</Card.Text>
+                  <Card.Text>{this.state.currentHero.name}</Card.Text>
+                {
+                this.state.showDieImg &&
+                <Card.Img
+                  src={this.state.diceImgSrc}
+                  className="dieImg"
+                  />
+                }
+                <Button onClick={this.handleRollDie}>Roll!</Button>  
+
                 </Card.ImgOverlay>
               </Card.Body>
             </Card>
