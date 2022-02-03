@@ -46,6 +46,11 @@ class App extends React.Component {
     }
   }
 
+  //Getting Random Number
+  getRandomInt = (max) => {
+    return Math.floor(Math.random() * max);
+  };
+
 
   //Getting list of monsters
   getMonsters = async () => {
@@ -60,13 +65,10 @@ class App extends React.Component {
         errorMessage: `Uh Oh Error: ${error.response.status}, ${error.response.data.error}`
       })
     }
+    this.loadMonster();
     console.log('this is monsters data', this.state.monsters)
   }
 
-  //Getting Random Number
-  getRandomInt = (max) => {
-    return Math.floor(Math.random() * max);
-  };
 
   //Generating a random number data via api call
   loadMonster = async () => {
@@ -100,6 +102,7 @@ class App extends React.Component {
         errorMessage: `Uh Oh Error: ${error.response.status}, ${error.response.data.error}`
       })
     }
+    this.loadWeapon();
     console.log('this is weapons data', this.state.weapons)
   }
 
@@ -134,6 +137,7 @@ class App extends React.Component {
         errorMessage: `Uh Oh Error: ${error.response.status}, ${error.response.data.error}`
       })
     }
+    this.loadSpell();
     console.log('this is spells data', this.state.spells)
   }
 
@@ -168,6 +172,7 @@ class App extends React.Component {
         errorMessage: `Uh Oh Error: ${error.response.status}, ${error.response.data.error}`
       })
     }
+    this.loadClass();
     console.log('this is classes data', this.state.classes)
   }
 
@@ -204,6 +209,7 @@ class App extends React.Component {
         errorMessage: `Uh Oh Error: ${error.response.status}, ${error.response.data.error}`
       })
     }
+    this.loadRace();
     console.log('this is races data', this.state.races)
   }
 
@@ -239,6 +245,7 @@ class App extends React.Component {
         errorMessage: `Uh Oh Error: ${error.response.status}, ${error.response.data.error}`
       })
     }
+    this.loadLanguage();
     console.log('this is languages data', this.state.languages)
   }
 
@@ -274,6 +281,7 @@ class App extends React.Component {
         errorMessage: `Uh Oh Error: ${error.response.status}, ${error.response.data.error}`
       })
     }
+    this.loadSkill();
     console.log('this is skills data', this.state.skills)
   }
 
@@ -297,6 +305,16 @@ class App extends React.Component {
 
   }
 
+  getAllThings = () => {
+    this.getMonsters();
+    this.getWeapons();
+    this.getSpells();
+    this.getClasses();
+    this.getRaces();
+    this.getLanguages();
+    this.getSkills();
+  }
+
 
   render() {
     return (
@@ -308,7 +326,16 @@ class App extends React.Component {
           {this.props.auth0.isAuthenticated ? <h2 className="welcome">Welcome {this.props.auth0.user.given_name} !</h2> : <h2>Please Log In!</h2>}
           {this.props.auth0.isAuthenticated ?
             <Container>
-              <HeroSelector />
+              <HeroSelector 
+              getAllThings={this.getAllThings}
+              monsterData={this.state.monsterData}
+              weaponData={this.state.weaponData}
+              spellData={this.state.spellData}
+              classData={this.state.classData}
+              raceData={this.state.raceData}
+              languageData={this.state.languageData}
+              skillData={this.state.skillData}
+              />
             </Container>
             : <h2></h2>
           }
