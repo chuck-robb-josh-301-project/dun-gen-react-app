@@ -369,11 +369,8 @@ let itemDesc = '';
 
 let rollWeaponFindEvent = () => {
   rollWeapon();
-  if (currentWeapon.desc) {
-    itemDesc = (currentWeapon.desc[currentWeapon.desc.length]).split('.');
-  } else {
-    itemDesc = `A${currentWeapon.weapon_category} weapon used for ${currentWeapon.damage.damage_type.index}.`;
-  }
+  currentWeapon.desc ? itemDesc = (currentWeapon.desc[currentWeapon.desc.length - 1]).split('.') :
+    itemDesc = `A${currentWeapon.weapon_category} weapon used for ${currentWeapon.damage.damage_type.index}.`;  
 
   let gearFindEvent = `${itemDesc}`;
   fullText += gearFindEvent;
