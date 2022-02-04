@@ -349,7 +349,7 @@ class App extends React.Component {
               />
               
             </Container>
-            : <h2></h2>
+            : <h2>Am I still here?</h2>
           }
 
               <Card className="clear">
