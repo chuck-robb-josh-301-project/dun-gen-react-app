@@ -94,7 +94,7 @@ class HeroSelector extends React.Component {
       showGameCard: false,
       showAccCard: true,
       imageSrc: '',
-      location: 'stairs',
+      location: 'village',
       diceImgSrc: '',
       randDieNum: 'd18',
       showDieImg: false,
@@ -116,7 +116,8 @@ class HeroSelector extends React.Component {
     })
   }
 
-  handleRollDie = () => {
+  handleRollDie = (e) => {
+    e.preventDefault();
     this.setState({
       showDieImg: true
     })
@@ -352,6 +353,7 @@ class HeroSelector extends React.Component {
               <Card.Body>
                 <Card.Img
                   src={this.state.imageSrc}
+                  alt={this.state.imageSrc}
                   className="cardimg"
                 />
                 <Card.ImgOverlay className="gameCardText">
@@ -372,10 +374,11 @@ class HeroSelector extends React.Component {
                     this.state.showDieImg &&
                     <Card.Img
                       src={this.state.diceImgSrc}
+                      alt={this.state.diceImgSrc}
                       className="dieImg"
                     />
                   }
-                  <Button onClick={this.handleRollDie}>Roll!</Button>
+                  <Button onClick={this.handleRollDie} className="rollButton">Roll!</Button>
 
                 </Card.ImgOverlay>
               </Card.Body>
@@ -385,7 +388,11 @@ class HeroSelector extends React.Component {
 
         <Container>
           <Modal>
-            <Modal.Body>
+            <Modal.Body style={{
+
+              overflow: 'auto'
+            }}
+            >
               <img />
               <p>Joshua is an Air Force veteran and budding software developer based out of Seattle. He discovered a deep interest in coding while working at National Oceanic and Atmospheric Administration in an effort to automate processes for remote work during COVID-19.
               </p>

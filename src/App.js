@@ -10,6 +10,9 @@ import './App.css'
 // import Book1 from './img/book1.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import stairs from './img/stairs2.jpg'
+import chuck from './img/resized_me.jpg'
+import robb from './img/robb.png'
+import josh from './img/josh.png'
 
 
 const urlApi = `https://www.dnd5eapi.co`;
@@ -44,7 +47,7 @@ class App extends React.Component {
       skills: [],
       skillData: [],
       renderError: false,
-      // aboutUs: false,
+      aboutUs: false,
     }
   }
 
@@ -323,6 +326,11 @@ class App extends React.Component {
       aboutUs: true,
     })
   }
+  handleAboutClose = () =>{
+    this.setState({
+      aboutUs: false,
+    })
+  }
 
 
   render() {
@@ -333,7 +341,7 @@ class App extends React.Component {
         <>
           <Header className="headClass" />
           {this.props.auth0.isAuthenticated ? <LogoutButton /> : <LoginButton />}
-          {this.props.auth0.isAuthenticated ? <h2 className="welcome">Welcome {this.props.auth0.user.given_name} !</h2> : <h2>Please Log In!</h2>}
+          {this.props.auth0.isAuthenticated ? <h2 className="welcome">Welcome {this.props.auth0.user.given_name} !</h2> : <h2 className="welcome">Please Log In!</h2>}
           <Button onClick={this.handleAbout}>About Us</Button>
           {this.props.auth0.isAuthenticated ?
             <Container>
@@ -349,35 +357,36 @@ class App extends React.Component {
               />
               
             </Container>
-            : <h2></h2>
-          }
-
-              <Card className="clear">
+            : <Card className="clear">
                 <Card.Img
                 src={stairs}
                 />
               </Card>
+          }
 
-          {
-            this.state.aboutUs &&
-            <Container>
-              <Modal>
+
+         
+            
+              <Modal 
+                className="about"
+                show={this.state.aboutUs}
+                onHide={this.handleAboutClose}
+              >
+                <Modal.Header closeButton>About Us</Modal.Header>
                 <Modal.Body>
-                  <img />
+                  <img src={josh} alt="a picture of josh" className="aboutImg"/>
                   <p>Joshua is an Air Force veteran and budding software developer based out of Seattle. He discovered a deep interest in coding while working at National Oceanic and Atmospheric Administration in an effort to automate processes for remote work during COVID-19.
                   </p>
-                  <img />
-                  <p>I'm Robb Alexander: Most of my educational background is in philosophy and biology, but I love learning about new fields. I'm a student developer hoping to get into the Seattle-area tech workforce in the coming year. I'm excited to learn and apply more coding skills for a career that challenges my critical thinking.
-                    GitHub:
-                    LinkedIn:
+                  <img src={robb} alt="a picture of robb" className="aboutImg"/>
+                  <p>I'm Robb Alexander: Most of my educational background is in philosophy and biology, but I love learning about new fields. I'm a student developer hoping to get into the Seattle-area tech workforce in the coming year. I'm excited to learn and apply more coding skills for a career that challenges my critical thinking.                    
                   </p>
-                  <im />
+                  <img src={chuck} alt="a picture of chuck" className="aboutImg"/>
                   <p>Chuck was born in Philadelphia PA, but spent the first 2 years of his life living in Saudi Arabia.  He was then raised in Pittsburgh, PA where he still resides.  Chuck has two undergraduate degrees that he has hardly used and is now in school to for software development. He became interested in software development while learning to program his raspberry pi as a hobby. Chuck’s interests include: Video games, Movies, TV, Woodworking, building projects with raspberry pis, and general tinkering.  After Code Fellows Chuck’s ultimate goal is to get a job working on video games, robotics, or a combination of the two.
                   </p>
                 </Modal.Body>
               </Modal>
-            </Container>
-          }
+            
+          
 
         </>
         <footer className="foot">&copy; jor o'chu</footer>
