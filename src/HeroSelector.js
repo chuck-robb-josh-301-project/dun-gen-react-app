@@ -449,7 +449,7 @@ class HeroSelector extends React.Component {
                 <Card.ImgOverlay className="gameCardText">
                   
                   <Card.Text className="wallotext"> 
-                  {`The shouts and clatter lead into the center of ${this.state.currentHero.villageName}. On the way, a half-dozen still bodies lay on the cobblestones untended. A loose semicircle of villagers hold trembling pitchforks, scythes, and torches, their horrified faces exaggerated by the flickering light. Before them, the source of the commotion: a ${this.props.monsterData.name}. ${this.state.currentHero.name} readies what weapons are at hand and advances. The practiced movements and confident bearing are not lost on the ${this.props.monsterData.name}. 
+                  {`The shouts and clatter lead into the center of ${this.state.currentHero.villageName}. On the way, a half-dozen still bodies lay on the cobblestones untended. A loose semicircle of villagers hold trembling pitchforks, scythes, and torches, their horrified faces exaggerated by the flickering light. Before them, the ${this.props.monsterData.size} source of the commotion: a ${this.props.monsterData.name} keeps the villagers at bay with a fearsome ${this.props.monsterdata.actions[0].name} ${this.state.currentHero.name} readies what weapons are at hand and advances. The practiced movements and confident bearing are not lost on the ${this.props.monsterData.name}, which sized ${possiblePronouns[1]} up and retreated down the main road.
   Upon return, ${this.state.currentHero.name} sees only the buckling frame of ${possiblePronouns[2]} childhood home. A fit of grief sweeps through rage at the attackers, then suspicion at the neighbors, but settles into a dank quiet -- it was unlikely that the torch-wielding villagers would have lit the cottage other than in hapless desperation, though certainty found no purchase.\n`}
                   </Card.Text>
                   <Button onClick={this.renderCardFour} className="rollButton">Roll!</Button>
@@ -500,7 +500,7 @@ class HeroSelector extends React.Component {
                   {`${this.state.currentHero.name} nods ${possiblePronouns[2]} head silently, bereft of reasons not to.\n
   The elder scrapes an aged finger against the flat end of the bladed tool, pulling up a caked brown gunk-- perhaps blood, or something more sinister still-- rubbing it around the edge of the box's lid and along an axled arrow suspended above the disk. Inaudible whispers and a series of arching hand gestures follow, until the seam of the case disappears from view, leaving uninterrupted patterns. The elder then hands over the objects.
   "Our contract is signed into the bounty. You need not return if your task is done."\n
-  The elder gives no explanation of the disk, but ${this.state.currentHero.name} in only the clothes on ${possiblePronouns[2]} back, some provisions from the elder, and the hardiest heirlooms that were salvaged from the fire, ${this.state.currentHero.name} leaves home for the first and final time.\n\n`}
+  The elder gives no explanation of the disk, but ${this.state.currentHero.name} in only the clothes on ${possiblePronouns[2]} back, some provisions from the elder, and the heirloom ${this.props.weapons.data[0].name} that were salvaged from the fire, ${this.state.currentHero.name} leaves home for the first and final time.\n\n`}
                   </Card.Text>
                   {/* <Button onClick={this.handleRollDie} className="rollButton">Roll!</Button> */}
 
