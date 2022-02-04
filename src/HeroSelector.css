@@ -80,3 +80,24 @@ h2{
 .rollButton:hover {
   background-color: red;
 }
+.cardImg2{
+  height: 30vw;
+}
+.wallotext2{
+  background-color: rgba(0, 0, 0, 0.815);
+  
+  font-family: 'Press Start 2P', cursive;
+  /* overflow: scroll; */
+  max-height: 10vw;
+  margin-top: 20vw;
+}
+
+.wallotext3{
+  background-color: rgba(0, 0, 0, 0.815);
+  
+  font-family: 'Press Start 2P', cursive;
+  /* overflow: scroll; */
+  max-height: 10vw;
+  margin-top: 20vw;
+  font-size: xx-large;
+}

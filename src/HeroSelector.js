@@ -14,6 +14,7 @@ import niceVillage from './img/villageNice.jpg'
 import fireVillage from './img/fireVillage.jpg'
 import warrior from './img/warrior.jpg'
 import destroyedVillage from './img/Destroyed-Village.jpg'
+import monster from './img/From-the-Depth-of-Darkness.jpg'
 import d1 from "./img/d1.png"
 import d2 from "./img/d2.png"
 import d3 from "./img/d3.png"
@@ -46,6 +47,7 @@ const imageObject = {
   fireVillage,
   warrior,
   destroyedVillage,
+  monster,
 }
 
 const diceObject = {
@@ -93,6 +95,8 @@ class HeroSelector extends React.Component {
       showGameCard3: false,
       showGameCard4: false,
       showGameCard5: false,
+      showGameCard6: false,
+      showGameCard7: false,
       secondLocation: '',
 
 
@@ -173,6 +177,23 @@ class HeroSelector extends React.Component {
       secondLocation: warrior,
     })
   }
+  renderCardSix = (e)=>{
+    e.preventDefault();
+    this.setState({
+      showGameCard5: false,
+      showGameCard6: true,
+      secondLocation: monster,
+    })
+  }
+  renderCardSeven = (e)=>{
+    e.preventDefault();
+    this.setState({
+      showGameCard6: false,
+      showGameCard7: true,
+      secondLocation: monster,
+    })
+  }
+  
 
   getHerosInfo = async () => {
     if (this.props.auth0.isAuthenticated) {
@@ -502,7 +523,55 @@ class HeroSelector extends React.Component {
   "Our contract is signed into the bounty. You need not return if your task is done."\n
   The elder gives no explanation of the disk, but ${this.state.currentHero.name} in only the clothes on ${possiblePronouns[2]} back, some provisions from the elder, and the hardiest heirlooms that were salvaged from the fire, ${this.state.currentHero.name} leaves home for the first and final time.\n\n`}
                   </Card.Text>
-                  {/* <Button onClick={this.handleRollDie} className="rollButton">Roll!</Button> */}
+                  <Button onClick={this.renderCardSix} className="rollButton">Roll!</Button>
+
+                </Card.ImgOverlay>
+              </Card.Body>
+            </Card>
+          </Container>   
+           }
+
+{
+          this.state.showGameCard6 &&
+          <Container >
+            <Card className="gameCard" >
+              <Card.Body>
+                <Card.Img
+                  src={this.state.secondLocation}
+                  alt={this.state.imageSrc}
+                  className="cardImg2"
+                />
+                <Card.ImgOverlay className="gameCardText">
+                  
+                  <Card.Text className="wallotext2"> 
+                  {`The ${this.props.monsterData.name} appears before ${this.state.currentHero.name}. This creature destroyed ${possiblePronouns[2]} village, ended ${possiblePronouns[2]} way of life, killed countless ${this.props.raceData.name}. This monster must be destroyed. No other village can meet the same fate as ${this.state.currentHero.villageName}. What does ${this.state.currentHero.name} do?`}  
+                  </Card.Text>
+                  { <Button onClick={this.renderCardSeven} className="rollButton">Attack!</Button> }
+                  { <Button onClick={this.renderCardSeven} className="rollButton">Flee!</Button> }
+
+                </Card.ImgOverlay>
+              </Card.Body>
+            </Card>
+          </Container>   
+           }
+
+{
+          this.state.showGameCard7 &&
+          <Container >
+            <Card className="gameCard" >
+              <Card.Body>
+                <Card.Img
+                  src={this.state.secondLocation}
+                  alt={this.state.imageSrc}
+                  className="cardImg2"
+                />
+                <Card.ImgOverlay className="gameCardText">
+                  
+                  <Card.Text className="wallotext3"> 
+                  {`To Be Continued`}  
+                  </Card.Text>
+                  { <Button onClick={this.renderCardSeven} className="rollButton">restart adventure!</Button> }
+                  
 
                 </Card.ImgOverlay>
               </Card.Body>
