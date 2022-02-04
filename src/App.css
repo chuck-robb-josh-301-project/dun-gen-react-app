@@ -3,7 +3,7 @@
   background-image: url('./img/book1.png');
 } */
 
-body {
+.body {
   background-image: url('../img/book1.png');
   background-repeat: no-repeat;
   background-size: 100%;
@@ -22,5 +22,16 @@ h1 {
   padding-top: 5%; 
   font-size: 4vw;
   font-family: 'Press Start 2P', cursive;
+}
+
+.foot{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;  
+}
+
+.clear {
+  opacity: 0;
 }
 
