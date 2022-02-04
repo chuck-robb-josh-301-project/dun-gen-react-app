@@ -13,6 +13,8 @@ import stairs from './img/stairs2.jpg'
 import niceVillage from './img/villageNice.jpg'
 import fireVillage from './img/fireVillage.jpg'
 import warrior from './img/warrior.jpg'
+import destroyedVillage from './img/Destroyed-Village.jpg'
+import monster from './img/From-the-Depth-of-Darkness.jpg'
 import d1 from "./img/d1.png"
 import d2 from "./img/d2.png"
 import d3 from "./img/d3.png"
@@ -44,6 +46,8 @@ const imageObject = {
   niceVillage,
   fireVillage,
   warrior,
+  destroyedVillage,
+  monster,
 }
 
 const diceObject = {
@@ -91,6 +95,8 @@ class HeroSelector extends React.Component {
       showGameCard3: false,
       showGameCard4: false,
       showGameCard5: false,
+      showGameCard6: false,
+      showGameCard7: false,
       secondLocation: '',
 
 
@@ -160,7 +166,7 @@ class HeroSelector extends React.Component {
     this.setState({
       showGameCard3: false,
       showGameCard4: true,
-      secondLocation: village,
+      secondLocation: destroyedVillage,
     })
   }
   renderCardFive = (e)=>{
@@ -171,13 +177,36 @@ class HeroSelector extends React.Component {
       secondLocation: warrior,
     })
   }
+  renderCardSix = (e)=>{
+    e.preventDefault();
+    this.setState({
+      showGameCard5: false,
+      showGameCard6: true,
+      secondLocation: monster,
+    })
+  }
+  renderCardSeven = (e)=>{
+    e.preventDefault();
+    this.setState({
+      showGameCard6: false,
+      showGameCard7: true,
+      secondLocation: monster,
+    })
+  }
+  resetGame = (e)=>{
+    e.preventDefault();
+    this.setState({
+      showGameCard7: false,
+      showAccCard: true,
+    })
+  }
+  
 
   getHerosInfo = async () => {
     if (this.props.auth0.isAuthenticated) {
       const responseFromAuth0 = await this.props.auth0.getIdTokenClaims();
       //Super Duper Important 
       const jwt = responseFromAuth0.__raw;
-      //console.log(jwt);
       const config = {
         method: 'get',
         baseURL: process.env.REACT_APP_SERVER_URL,
@@ -187,14 +216,6 @@ class HeroSelector extends React.Component {
       const heroResponse = await axios(config);
       this.setState({ heros: heroResponse.data })
     }
-    // try {
-    //   let heroData = await axios.get(`${SERVER}/heros`)
-    //   this.setState({
-    //     heros: heroData.data
-    //   })
-    // } catch (err) {
-    //   console.error(err)
-    // }
   }
 
   makeHero = async (newHero) => {
@@ -277,13 +298,12 @@ class HeroSelector extends React.Component {
       <Accordion.Item key={idx} eventKey={idx}>
         <Accordion.Header><h2>{hero.name}</h2></Accordion.Header>
         <Accordion.Body className="accbod">
-          {hero.race}
-          {hero.class}
+          {hero.race}-
+          {hero.class}-
           {hero.villageName}
-          {hero.progress}
           {hero.background}
-          <Button variant="primary" onClick={() => this.setState({ currentHero: hero, showHero: true })}>Load</Button>
-          <Button variant="danger" onClick={() => this.deleteHero(hero._id)}>Delete</Button>
+          <Button className='loadDeleteButton' variant="primary" onClick={() => this.setState({ currentHero: hero, showHero: true })}>Load</Button>
+          <Button className='loadDeleteButton' variant="danger" onClick={() => this.deleteHero(hero._id)}>Delete</Button>
         </Accordion.Body>
       </Accordion.Item>
 
@@ -293,7 +313,7 @@ class HeroSelector extends React.Component {
 
         {
           this.state.showHero &&
-          <h2>{this.props.auth0.user.given_name} selected {this.state.currentHero.name}</h2>
+          <h2>{this.props.auth0.user.given_name} Hath Chosen {this.state.currentHero.name}!</h2>
         }
         {
           this.state.showAccCard &&
@@ -304,8 +324,8 @@ class HeroSelector extends React.Component {
                 <Accordion className="accord">
                   {herosToRender}
                 </Accordion>
-                <Button onClick={this.handleModal}>Create New Hero</Button>
-                <Button onClick={this.renderCard}>Start Game</Button>
+                <Button className='heroButtons' onClick={this.handleModal}>Create New Hero</Button>
+                <Button className='heroButtons' onClick={this.renderCard}>Start Game</Button>
               </Card.Body>
             </Card>
           </Container>
@@ -338,17 +358,17 @@ class HeroSelector extends React.Component {
                 <Form.Group controlId="class">
                   <Form.Select className="forms" >
                     <option value="0">Choose a class</option>
-                    <option value="Fighter">fighter</option>
-                    <option value="Wizard">wizard</option>
-                    <option value="Rogue">rogue</option>
+                    <option value="Fighter">Fighter</option>
+                    <option value="Wizard">Wizard</option>
+                    <option value="Rogue">Rogue</option>
                   </Form.Select>
                 </Form.Group>
                 <Form.Group controlId="race">
                   <Form.Select className="forms2" >
                     <option value="0">Choose a Race</option>
-                    <option value="Human">human</option>
-                    <option value="Elf">elf</option>
-                    <option value="Dragonborn">dragonborn</option>
+                    <option value="Human">Human</option>
+                    <option value="Elf">Elf</option>
+                    <option value="Dragonborn">Dragonborn</option>
                   </Form.Select>
                 </Form.Group>
                 {/* <Form.Group controlId="pronouns">
@@ -384,17 +404,7 @@ class HeroSelector extends React.Component {
                   
                   <Card.Text className="wallotext"> {`${this.state.currentHero.name} ends another day on the outskirts of the village of ${this.state.currentHero.villageName}. Born in this simple cottage, as much a local as ${possiblePronouns[2]} ${this.props.raceData.name} neighbors, ${possiblePronouns[0]} keeps to ${possiblePronouns[1]}self. Decades earlier, ${possiblePronouns[2]} parents had been travellers and chose ${this.state.currentHero.villageName} to settle down in--though for reasons lost on ${this.state.currentHero.name}. Raised with the skills ${possiblePronouns[2]} parents learned elsewhere, finding work in the village was easy and aimless, but interactions were terse and just shy of hostile.\n`}
                   </Card.Text>
-{/* //  ${this.state.currentHero.name} awakes with a start to the smell of char. Smoke and shouting cloud ${possiblePronouns[2]} mind for a few moments, then ${possiblePronouns[0]} rushes to get clothed and investigate.\n
-//  Following the noise, ${this.state.currentHero.name} bursts out of ${possiblePronouns[2]} home to see flames slithering up its far wall. Every few paces to the nearest house, fire dances in tight pools. Harried ${this.props.raceData.name}s ferry buckets of mud and well water to nearby buildings in the dim morning light. Spent torches litter the ground, as do smears of blood, scattered rags, and an orphaned boot. The baker pulls ${this.state.currentHero.name} by the arm away from the mud team with a plea: "Into town! Hurry!"\n 
-//  The shouts and clatter lead into the center of ${this.state.currentHero.villageName}. On the way, a half-dozen still bodies lay on the cobblestones untended. A loose semicircle of villagers hold trembling pitchforks, scythes, and torches, their horrified faces exaggerated by the flickering light. Before them, the source of the commotion: a ${this.props.monsterData.name}. ${this.state.currentHero.name} readies what weapons are at hand and advances. The practiced movements and confident bearing are not lost on the ${this.props.monsterData.name}. 
-//  Upon return, ${this.state.currentHero.name} sees only the buckling frame of ${possiblePronouns[2]} childhood home. A fit of grief sweeps through rage at the attackers, then suspicion at the neighbors, but settles into a dank quiet -- it was unlikely that the torch-wielding villagers would have lit the cottage other than in hapless desperation, though certainty found no purchase.\n
-//  "${this.state.currentHero.race}!" a voice calls as it crests the hill behind you. It is the village elder, weary and determined, lurching at an angle against some sharp farming implement and a back satchel. The elder eyes ${this.state.currentHero.name}'s smoldering abode: "It seem we have both lost our ties to ${this.state.currentHero.villageName} this day." Taking stock of the chaos of the morning, ${this.state.currentHero.name} recalls the modest coloring on the clothing of several of the fallen among the drab of their fellows. "My remaining time was for my children, my remaining wealth for their children-to-be. If you can secure their justice, their inheritance will pay your way to a new home that is... more suitable for you." The elder reveals a solid case just large enough to still fit under an arm-- weathered but with faint filigree still showing, as well as an oddly marked disk small enough to fit in the palm of your hand. "Do you assent, ${this.state.currentHero.race}?"\n
-//  ${this.state.currentHero.name} nods ${possiblePronouns[2]} head silently, bereft of reasons not to.\n
-//  The elder scrapes an aged finger against the flat end of the bladed tool, pulling up a caked brown gunk-- perhaps blood, or something more sinister still-- rubbing it around the edge of the box's lid and along an axled arrow suspended above the disk. Inaudible whispers and a series of arching hand gestures follow, until the seam of the case disappears from view, leaving uninterrupted patterns. The elder then hands over the objects.
-//  "Our contract is signed into the bounty. You need not return if your task is done."\n
-//  The elder gives no explanation of the disk, but when ${this.state.currentHero.name} in With only the clothes on ${possiblePronouns[2]} back, some provisions from the elder, and the hardiest heirlooms that were salvaged from the fire, ${this.state.currentHero.name} leaves home for the first and final time.\n\n`} */}
                   
-
                   {
                     this.state.showDieImg &&
                     <Card.Img
@@ -496,11 +506,59 @@ class HeroSelector extends React.Component {
                   
                   <Card.Text className="wallotext"> 
                   {`${this.state.currentHero.name} nods ${possiblePronouns[2]} head silently, bereft of reasons not to.\n
-//  The elder scrapes an aged finger against the flat end of the bladed tool, pulling up a caked brown gunk-- perhaps blood, or something more sinister still-- rubbing it around the edge of the box's lid and along an axled arrow suspended above the disk. Inaudible whispers and a series of arching hand gestures follow, until the seam of the case disappears from view, leaving uninterrupted patterns. The elder then hands over the objects.
-//  "Our contract is signed into the bounty. You need not return if your task is done."\n
-//  The elder gives no explanation of the disk, but when ${this.state.currentHero.name} in With only the clothes on ${possiblePronouns[2]} back, some provisions from the elder, and the hardiest heirlooms that were salvaged from the fire, ${this.state.currentHero.name} leaves home for the first and final time.\n\n`}
+  The elder scrapes an aged finger against the flat end of the bladed tool, pulling up a caked brown gunk-- perhaps blood, or something more sinister still-- rubbing it around the edge of the box's lid and along an axled arrow suspended above the disk. Inaudible whispers and a series of arching hand gestures follow, until the seam of the case disappears from view, leaving uninterrupted patterns. The elder then hands over the objects.
+  "Our contract is signed into the bounty. You need not return if your task is done."\n
+  The elder gives no explanation of the disk, but ${this.state.currentHero.name} in only the clothes on ${possiblePronouns[2]} back, some provisions from the elder, and the hardiest heirlooms that were salvaged from the fire, ${this.state.currentHero.name} leaves home for the first and final time.\n\n`}
                   </Card.Text>
-                  {/* <Button onClick={this.handleRollDie} className="rollButton">Roll!</Button> */}
+                  <Button onClick={this.renderCardSix} className="rollButton">Roll!</Button>
+
+                </Card.ImgOverlay>
+              </Card.Body>
+            </Card>
+          </Container>   
+           }
+
+{
+          this.state.showGameCard6 &&
+          <Container >
+            <Card className="gameCard" >
+              <Card.Body>
+                <Card.Img
+                  src={this.state.secondLocation}
+                  alt={this.state.imageSrc}
+                  className="cardImg2"
+                />
+                <Card.ImgOverlay className="gameCardText">
+                  
+                  <Card.Text className="wallotext2"> 
+                  {`The ${this.props.monsterData.name} appears before ${this.state.currentHero.name}. This creature destroyed ${possiblePronouns[2]} village, ended ${possiblePronouns[2]} way of life, killed countless ${this.props.raceData.name}. This monster must be destroyed. No other village can meet the same fate as ${this.state.currentHero.villageName}. What does ${this.state.currentHero.name} do?`}  
+                  </Card.Text>
+                  { <Button onClick={this.renderCardSeven} className="rollButton">Attack!</Button> }
+                  { <Button onClick={this.renderCardSeven} className="rollButton">Flee!</Button> }
+
+                </Card.ImgOverlay>
+              </Card.Body>
+            </Card>
+          </Container>   
+           }
+
+{
+          this.state.showGameCard7 &&
+          <Container >
+            <Card className="gameCard" >
+              <Card.Body>
+                <Card.Img
+                  src={this.state.secondLocation}
+                  alt={this.state.imageSrc}
+                  className="cardImg2"
+                />
+                <Card.ImgOverlay className="gameCardText">
+                  
+                  <Card.Text className="wallotext3"> 
+                  {`To Be Continued`}  
+                  </Card.Text>
+                  { <Button onClick={this.resetGame} className="rollButton">restart adventure!</Button> }
+                  
 
                 </Card.ImgOverlay>
               </Card.Body>

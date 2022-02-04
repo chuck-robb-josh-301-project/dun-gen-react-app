@@ -340,7 +340,7 @@ class App extends React.Component {
         <>
           <Header className="headClass" />
           {this.props.auth0.isAuthenticated ? <LogoutButton /> : <LoginButton />}
-          {this.props.auth0.isAuthenticated ? <h2 className="welcome">Welcome {this.props.auth0.user.given_name} !</h2> : <h2 className="welcome">Please Log In!</h2>}
+          {this.props.auth0.isAuthenticated ? <h2 className="welcome">Be Wary {this.props.auth0.user.given_name}!</h2> : <h2 className="welcome">Enter If You DARE!</h2>}
           <Button onClick={this.handleAbout}>About Us</Button>
           {this.props.auth0.isAuthenticated ?
             <Container>
