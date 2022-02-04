@@ -45,6 +45,7 @@ h2{
   text-align: center;
   color:whitesmoke;
   background-color: rgb(31, 2, 2);
+  margin-top: -3vw;
 
 }
 .gameCardText {
@@ -59,10 +60,23 @@ h2{
 }
 
 .wallotext {
-  background-color: rgba(0, 0, 0, 0.65);
+  background-color: rgba(0, 0, 0, 0.815);
   /* font-weight: bolder; */
   font-family: 'Press Start 2P', cursive;
+  overflow: scroll;
+  max-height: 10vw;
+  margin-top: 20vw;
 }
 .cardimg {
   height: 100%;
+  overflow: scroll;
+}
+
+.rollButton{
+  float: right;
+  margin-top: .5vw;
+  
+}
+.rollButton:hover {
+  background-color: red;
 }
