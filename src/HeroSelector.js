@@ -13,6 +13,7 @@ import stairs from './img/stairs2.jpg'
 import niceVillage from './img/villageNice.jpg'
 import fireVillage from './img/fireVillage.jpg'
 import warrior from './img/warrior.jpg'
+import destroyedVillage from './img/Destroyed-Village.jpg'
 import d1 from "./img/d1.png"
 import d2 from "./img/d2.png"
 import d3 from "./img/d3.png"
@@ -44,6 +45,7 @@ const imageObject = {
   niceVillage,
   fireVillage,
   warrior,
+  destroyedVillage,
 }
 
 const diceObject = {
@@ -160,7 +162,7 @@ class HeroSelector extends React.Component {
     this.setState({
       showGameCard3: false,
       showGameCard4: true,
-      secondLocation: village,
+      secondLocation: destroyedVillage,
     })
   }
   renderCardFive = (e)=>{
@@ -496,9 +498,9 @@ class HeroSelector extends React.Component {
                   
                   <Card.Text className="wallotext"> 
                   {`${this.state.currentHero.name} nods ${possiblePronouns[2]} head silently, bereft of reasons not to.\n
-//  The elder scrapes an aged finger against the flat end of the bladed tool, pulling up a caked brown gunk-- perhaps blood, or something more sinister still-- rubbing it around the edge of the box's lid and along an axled arrow suspended above the disk. Inaudible whispers and a series of arching hand gestures follow, until the seam of the case disappears from view, leaving uninterrupted patterns. The elder then hands over the objects.
-//  "Our contract is signed into the bounty. You need not return if your task is done."\n
-//  The elder gives no explanation of the disk, but when ${this.state.currentHero.name} in With only the clothes on ${possiblePronouns[2]} back, some provisions from the elder, and the hardiest heirlooms that were salvaged from the fire, ${this.state.currentHero.name} leaves home for the first and final time.\n\n`}
+  The elder scrapes an aged finger against the flat end of the bladed tool, pulling up a caked brown gunk-- perhaps blood, or something more sinister still-- rubbing it around the edge of the box's lid and along an axled arrow suspended above the disk. Inaudible whispers and a series of arching hand gestures follow, until the seam of the case disappears from view, leaving uninterrupted patterns. The elder then hands over the objects.
+  "Our contract is signed into the bounty. You need not return if your task is done."\n
+  The elder gives no explanation of the disk, but ${this.state.currentHero.name} in only the clothes on ${possiblePronouns[2]} back, some provisions from the elder, and the hardiest heirlooms that were salvaged from the fire, ${this.state.currentHero.name} leaves home for the first and final time.\n\n`}
                   </Card.Text>
                   {/* <Button onClick={this.handleRollDie} className="rollButton">Roll!</Button> */}
 
