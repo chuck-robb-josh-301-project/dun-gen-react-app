@@ -45,7 +45,7 @@ Dun.Gen() is a procedurally generated fantasy story application. The existing ge
   
 ### Data Flow
 
-![Data Flow Diagram](/img/dom-data-schema-two.png)
+![Data Flow Diagram](/src/img/dom-data-schema-two.png)
 
 ## Non-Functional Requirements
 

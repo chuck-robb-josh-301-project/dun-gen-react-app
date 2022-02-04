@@ -1,0 +1,82 @@
+.cardClass {
+  background-color: black;
+  color: black;
+  /* margin-bottom: 50vw; */
+}
+
+.modalClass {
+  font-family: 'Press Start 2P', cursive;
+  
+}
+
+.accord{
+  color: rgb(13, 48, 241);
+  
+}
+
+h2{
+  color: black;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.forms {
+  margin-top: 1vw;
+}
+
+.forms2{
+  margin-bottom: 2vw;
+  margin-top: 1vw;
+}
+
+.drop {
+  margin-bottom: 10vw;
+  padding: 5vw;
+}
+
+.accbod{
+  font-family: 'Press Start 2P', cursive;
+}
+
+.mod2 {
+  width: 100%;
+}
+
+.gameCard {
+  text-align: center;
+  color:whitesmoke;
+  background-color: rgb(31, 2, 2);
+  margin-top: -3vw;
+
+}
+.gameCardText {
+  margin-top: 3VW;
+  /* text-align: center; */
+}
+
+.dieImg {
+  max-width: 4vw;
+  max-height: 4vw;
+  /* opacity: .75 */
+}
+
+.wallotext {
+  background-color: rgba(0, 0, 0, 0.815);
+  /* font-weight: bolder; */
+  font-family: 'Press Start 2P', cursive;
+  overflow: scroll;
+  max-height: 10vw;
+  margin-top: 20vw;
+}
+.cardimg {
+  height: 100%;
+  overflow: scroll;
+}
+
+.rollButton{
+  float: right;
+  margin-top: .5vw;
+  
+}
+.rollButton:hover {
+  background-color: red;
+}
