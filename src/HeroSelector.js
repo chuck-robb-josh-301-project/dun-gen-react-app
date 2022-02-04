@@ -336,6 +336,7 @@ class HeroSelector extends React.Component {
               <Card.Body>
                 <Card.Img
                   src={this.state.imageSrc}
+                  alt="Dynamically Selected Background"
                   />
                 <Card.ImgOverlay className="gameCardText">
                   <Card.Title>Please Work</Card.Title>
@@ -345,6 +346,7 @@ class HeroSelector extends React.Component {
                 <Card.Img
                   src={this.state.diceImgSrc}
                   className="dieImg"
+                  alt="A Twenty-Sided Die"
                   />
                 }
                 <Button onClick={this.handleRollDie}>Roll!</Button>  

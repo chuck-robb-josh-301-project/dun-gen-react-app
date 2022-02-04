@@ -337,7 +337,7 @@ class App extends React.Component {
               skillData={this.state.skillData}
               />
             </Container>
-            : <h2></h2>
+            : <h2>Am I still here?</h2>
           }
 
         </>
