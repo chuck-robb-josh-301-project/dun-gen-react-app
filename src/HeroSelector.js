@@ -193,6 +193,13 @@ class HeroSelector extends React.Component {
       secondLocation: monster,
     })
   }
+  resetGame = (e)=>{
+    e.preventDefault();
+    this.setState({
+      showGameCard7: false,
+      showAccCard: true,
+    })
+  }
   
 
   getHerosInfo = async () => {
@@ -570,7 +577,7 @@ class HeroSelector extends React.Component {
                   <Card.Text className="wallotext3"> 
                   {`To Be Continued`}  
                   </Card.Text>
-                  { <Button onClick={this.renderCardSeven} className="rollButton">restart adventure!</Button> }
+                  { <Button onClick={this.resetGame} className="rollButton">restart adventure!</Button> }
                   
 
                 </Card.ImgOverlay>
