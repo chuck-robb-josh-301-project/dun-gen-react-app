@@ -19,6 +19,7 @@ h2{
   font-family: 'Press Start 2P', cursive;
 }
 
+
 .forms {
   margin-top: 1vw;
 }
@@ -27,7 +28,13 @@ h2{
   margin-bottom: 2vw;
   margin-top: 1vw;
 }
-
+.heroButtons {
+  margin-top: 1vw;
+  margin-left: 7.5vw;
+}
+.loadDeleteButton{
+margin-left: 1vw;
+}
 .drop {
   margin-bottom: 10vw;
   padding: 5vw;
