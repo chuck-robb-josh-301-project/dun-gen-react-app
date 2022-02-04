@@ -338,17 +338,17 @@ class HeroSelector extends React.Component {
                 <Form.Group controlId="class">
                   <Form.Select className="forms" >
                     <option value="0">Choose a class</option>
-                    <option value="Fighter">fighter</option>
-                    <option value="Wizard">wizard</option>
-                    <option value="Rogue">rogue</option>
+                    <option value="Fighter">Fighter</option>
+                    <option value="Wizard">Wizard</option>
+                    <option value="Rogue">Rogue</option>
                   </Form.Select>
                 </Form.Group>
                 <Form.Group controlId="race">
                   <Form.Select className="forms2" >
                     <option value="0">Choose a Race</option>
-                    <option value="Human">human</option>
-                    <option value="Elf">elf</option>
-                    <option value="Dragonborn">dragonborn</option>
+                    <option value="Human">Human</option>
+                    <option value="Elf">Elf</option>
+                    <option value="Dragonborn">Dragonborn</option>
                   </Form.Select>
                 </Form.Group>
                 {/* <Form.Group controlId="pronouns">
