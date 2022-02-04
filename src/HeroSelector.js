@@ -4,12 +4,12 @@ import { Accordion, Card, Container, Button, Modal, Form } from 'react-bootstrap
 import { withAuth0 } from '@auth0/auth0-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './HeroSelector.css'
-import bookPng from './img/book1.png'
 import cave from './img/16279.jpg'
 import swamp from './img/2202.jpg'
 import bridge from './img/bridge-19513.jpg'
 import forest from './img/forest-4099730.jpg'
 import village from './img/village.jpg'
+import stairs from './img/stairs2.jpg'
 import d1 from "./img/d1.png"
 import d2 from "./img/d2.png"
 import d3 from "./img/d3.png"
@@ -32,18 +32,19 @@ import d19 from "./img/d19.png"
 import d20 from "./img/d20.png"
 
 const imageObject = {
-  forest, 
-  cave,  
+  forest,
+  cave,
   swamp,
   bridge,
-  village
+  village,
+  stairs
 }
 
 const diceObject = {
   d1,
-  d2, 
+  d2,
   d3,
-  d4, 
+  d4,
   d5,
   d6,
   d7,
@@ -59,8 +60,26 @@ const diceObject = {
   d17,
   d18,
   d19,
-  d20 
+  d20
 }
+let possiblePronouns = ['they', 'them', 'their'];
+
+
+// let prologueOutsider = `${this.state.currentHero.name} ends another day on the outskirts of the village of ${this.state.currentHero.villageName}. Born in this simple cottage, as much a local as ${possiblePronouns[2]} ${this.props.raceData.name} neighbors, ${possiblePronouns[0]} keeps to ${possiblePronouns[1]}self. Decades earlier, ${possiblePronouns[2]} parents had been travellers and chose ${this.state.currentHero.villageName} to settle down in--though for reasons lost on ${this.state.currentHero.name}. Raised with the skills ${possiblePronouns[2]} parents learned elsewhere, finding work in the village was easy and aimless, but interactions were terse and just shy of hostile.\n
+// ${this.state.currentHero.name} awakes with a start to the smell of char. Smoke and shouting cloud ${possiblePronouns[2]} mind for a few moments, then ${possiblePronouns[0]} rushes to get clothed and investigate.\n
+// Following the noise, ${this.state.currentHero.name} bursts out of ${possiblePronouns[2]} home to see flames slithering up its far wall. Every few paces to the nearest house, fire dances in tight pools. Harried ${this.props.raceData}s ferry buckets of mud and well water to nearby buildings in the dim morning light. Spent torches litter the ground, as do smears of blood, scattered rags, and an orphaned boot. The baker pulls ${this.state.currentHero.name} by the arm away from the mud team with a plea: "Into town! Hurry!"\n 
+// The shouts and clatter lead into the center of ${this.state.currentHero.villageName}. On the way, a half-dozen still bodies lay on the cobblestones untended. A loose semicircle of villagers hold trembling pitchforks, scythes, and torches, their horrified faces exaggerated by the flickering light. Before them, the source of the commotion: a ${this.props.monsterData.name}. ${this.state.currentHero.name} readies what weapons are at hand and advances. The practiced movements and confident bearing are not lost on the ${this.props.monsterData.name}. 
+// Upon return, ${this.state.currentHero.name} sees only the buckling frame of ${possiblePronouns[2]} childhood home. A fit of grief sweeps through rage at the attackers, then suspicion at the neighbors, but settles into a dank quiet -- it was unlikely that the torch-wielding villagers would have lit the cottage other than in hapless desperation, though certainty found no purchase.\n
+// "${this.state.currentHero.race}!" a voice calls as it crests the hill behind you. It is the village elder, weary and determined, lurching at an angle against some sharp farming implement and a back satchel. The elder eyes ${this.state.currentHero.name}'s smoldering abode: "It seem we have both lost our ties to ${this.state.currentHero.villageName} this day." Taking stock of the chaos of the morning, ${this.state.currentHero.name} recalls the modest coloring on the clothing of several of the fallen among the drab of their fellows. "My remaining time was for my children, my remaining wealth for their children-to-be. If you can secure their justice, their inheritance will pay your way to a new home that is... more suitable for you." The elder reveals a solid case just large enough to still fit under an arm-- weathered but with faint filigree still showing, as well as an oddly marked disk small enough to fit in the palm of your hand. "Do you assent, ${this.state.currentHero.race}?"\n
+// ${this.state.currentHero.name} nods ${possiblePronouns[2]} head silently, bereft of reasons not to.\n
+// The elder scrapes an aged finger against the flat end of the bladed tool, pulling up a caked brown gunk-- perhaps blood, or something more sinister still-- rubbing it around the edge of the box's lid and along an axled arrow suspended above the disk. Inaudible whispers and a series of arching hand gestures follow, until the seam of the case disappears from view, leaving uninterrupted patterns. The elder then hands over the objects.
+// "Our contract is signed into the bounty. You need not return if your task is done."\n
+// The elder gives no explanation of the disk, but when ${this.state.currentHero.name} in With only the clothes on ${possiblePronouns[2]} back, some provisions from the elder, and the hardiest heirlooms that were salvaged from the fire, ${this.state.currentHero.name} leaves home for the first and final time.\n\n`;
+
+// let currentPage = prologueOutsider;
+
+
+
 
 
 const SERVER = process.env.REACT_APP_SERVER_URL;
@@ -75,11 +94,12 @@ class HeroSelector extends React.Component {
       showGameCard: false,
       showAccCard: true,
       imageSrc: '',
-      location: 'village',
+      location: 'stairs',
       diceImgSrc: '',
       randDieNum: 'd18',
       showDieImg: false,
-      showHero: false
+      showHero: false,
+
 
     }
   }
@@ -87,8 +107,8 @@ class HeroSelector extends React.Component {
   handleImgChange = () => {
     this.setState({
       imageSrc: imageObject[this.state.location]
-    })      
-}
+    })
+  }
 
   handleDieImgChange = () => {
     this.setState({
@@ -101,8 +121,8 @@ class HeroSelector extends React.Component {
       showDieImg: true
     })
   }
-    
-      
+
+
 
   handleModal = (e) => {
     e.preventDefault();
@@ -213,7 +233,6 @@ class HeroSelector extends React.Component {
     e.preventDefault();
     let newHero = {
       name: e.target.name.value,
-      // pronouns: JSON.parse(e.target.pronouns.value),
       race: e.target.race.value,
       class: e.target.class.value,
       villageName: e.target.villageName.value,
@@ -227,9 +246,7 @@ class HeroSelector extends React.Component {
   }
 
   render() {
-    console.log(this.props.auth0.user)
 
-    
     let herosToRender = this.state.heros.map((hero, idx) =>
 
       <Accordion.Item key={idx} eventKey={idx}>
@@ -246,7 +263,6 @@ class HeroSelector extends React.Component {
       </Accordion.Item>
 
     )
-    console.log('This the current Hero', this.state.currentHero)
     return (
       <>
 
@@ -329,33 +345,63 @@ class HeroSelector extends React.Component {
           </Modal>
         </Container>
 
-      { 
-        this.state.showGameCard &&
-        <Container >       
+        {
+          this.state.showGameCard &&
+          <Container >
             <Card className="gameCard" >
               <Card.Body>
                 <Card.Img
                   src={this.state.imageSrc}
                   alt="Dynamically Selected Background"
-                  />
+                  className="cardimg"
+                />
                 <Card.ImgOverlay className="gameCardText">
-                  <Card.Title>Please Work</Card.Title>
-                  <Card.Text>{this.state.currentHero.name}</Card.Text>
-                {
-                this.state.showDieImg &&
-                <Card.Img
-                  src={this.state.diceImgSrc}
-                  className="dieImg"
-                  alt="A Twenty-Sided Die"
-                  />
-                }
-                <Button onClick={this.handleRollDie}>Roll!</Button>  
+                  {/* <Card.Title>Please Work</Card.Title> */}
+                  <Card.Text className="wallotext"> {`${this.state.currentHero.name} ends another day on the outskirts of the village of ${this.state.currentHero.villageName}. Born in this simple cottage, as much a local as ${possiblePronouns[2]} ${this.props.raceData.name} neighbors, ${possiblePronouns[0]} keeps to ${possiblePronouns[1]}self. Decades earlier, ${possiblePronouns[2]} parents had been travellers and chose ${this.state.currentHero.villageName} to settle down in--though for reasons lost on ${this.state.currentHero.name}. Raised with the skills ${possiblePronouns[2]} parents learned elsewhere, finding work in the village was easy and aimless, but interactions were terse and just shy of hostile.\n
+ ${this.state.currentHero.name} awakes with a start to the smell of char. Smoke and shouting cloud ${possiblePronouns[2]} mind for a few moments, then ${possiblePronouns[0]} rushes to get clothed and investigate.\n
+ Following the noise, ${this.state.currentHero.name} bursts out of ${possiblePronouns[2]} home to see flames slithering up its far wall. Every few paces to the nearest house, fire dances in tight pools. Harried ${this.props.raceData.name}s ferry buckets of mud and well water to nearby buildings in the dim morning light. Spent torches litter the ground, as do smears of blood, scattered rags, and an orphaned boot. The baker pulls ${this.state.currentHero.name} by the arm away from the mud team with a plea: "Into town! Hurry!"\n 
+ The shouts and clatter lead into the center of ${this.state.currentHero.villageName}. On the way, a half-dozen still bodies lay on the cobblestones untended. A loose semicircle of villagers hold trembling pitchforks, scythes, and torches, their horrified faces exaggerated by the flickering light. Before them, the source of the commotion: a ${this.props.monsterData.name}. ${this.state.currentHero.name} readies what weapons are at hand and advances. The practiced movements and confident bearing are not lost on the ${this.props.monsterData.name}. 
+ Upon return, ${this.state.currentHero.name} sees only the buckling frame of ${possiblePronouns[2]} childhood home. A fit of grief sweeps through rage at the attackers, then suspicion at the neighbors, but settles into a dank quiet -- it was unlikely that the torch-wielding villagers would have lit the cottage other than in hapless desperation, though certainty found no purchase.\n
+ "${this.state.currentHero.race}!" a voice calls as it crests the hill behind you. It is the village elder, weary and determined, lurching at an angle against some sharp farming implement and a back satchel. The elder eyes ${this.state.currentHero.name}'s smoldering abode: "It seem we have both lost our ties to ${this.state.currentHero.villageName} this day." Taking stock of the chaos of the morning, ${this.state.currentHero.name} recalls the modest coloring on the clothing of several of the fallen among the drab of their fellows. "My remaining time was for my children, my remaining wealth for their children-to-be. If you can secure their justice, their inheritance will pay your way to a new home that is... more suitable for you." The elder reveals a solid case just large enough to still fit under an arm-- weathered but with faint filigree still showing, as well as an oddly marked disk small enough to fit in the palm of your hand. "Do you assent, ${this.state.currentHero.race}?"\n
+ ${this.state.currentHero.name} nods ${possiblePronouns[2]} head silently, bereft of reasons not to.\n
+ The elder scrapes an aged finger against the flat end of the bladed tool, pulling up a caked brown gunk-- perhaps blood, or something more sinister still-- rubbing it around the edge of the box's lid and along an axled arrow suspended above the disk. Inaudible whispers and a series of arching hand gestures follow, until the seam of the case disappears from view, leaving uninterrupted patterns. The elder then hands over the objects.
+ "Our contract is signed into the bounty. You need not return if your task is done."\n
+ The elder gives no explanation of the disk, but when ${this.state.currentHero.name} in With only the clothes on ${possiblePronouns[2]} back, some provisions from the elder, and the hardiest heirlooms that were salvaged from the fire, ${this.state.currentHero.name} leaves home for the first and final time.\n\n`}
+                  </Card.Text>
+
+                  {
+                    this.state.showDieImg &&
+                    <Card.Img
+                      src={this.state.diceImgSrc}
+                      alt="A Twenty-Sided Die"
+                      className="dieImg"
+                    />
+                  }
+                  <Button onClick={this.handleRollDie}>Roll!</Button>
 
                 </Card.ImgOverlay>
               </Card.Body>
             </Card>
           </Container>
         }
+
+        <Container>
+          <Modal>
+            <Modal.Body>
+              <img />
+              <p>Joshua is an Air Force veteran and budding software developer based out of Seattle. He discovered a deep interest in coding while working at National Oceanic and Atmospheric Administration in an effort to automate processes for remote work during COVID-19.
+              </p>
+              <img/>
+              <p>I'm Robb Alexander: Most of my educational background is in philosophy and biology, but I love learning about new fields. I'm a student developer hoping to get into the Seattle-area tech workforce in the coming year. I'm excited to learn and apply more coding skills for a career that challenges my critical thinking.
+              GitHub:
+              LinkedIn:
+              </p>
+              <im />
+              <p>Chuck was born in Philadelphia PA, but spent the first 2 years of his life living in Saudi Arabia.  He was then raised in Pittsburgh, PA where he still resides.  Chuck has two undergraduate degrees that he has hardly used and is now in school to for software development. He became interested in software development while learning to program his raspberry pi as a hobby. Chuck’s interests include: Video games, Movies, TV, Woodworking, building projects with raspberry pis, and general tinkering.  After Code Fellows Chuck’s ultimate goal is to get a job working on video games, robotics, or a combination of the two.                
+              </p>
+            </Modal.Body>
+          </Modal>
+        </Container>
 
       </>
 
