@@ -375,6 +375,7 @@ class HeroSelector extends React.Component {
                     <Card.Img
                       src={this.state.diceImgSrc}
                       alt={this.state.diceImgSrc}
+
                       className="dieImg"
                     />
                   }

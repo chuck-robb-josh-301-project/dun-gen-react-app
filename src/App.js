@@ -357,9 +357,12 @@ class App extends React.Component {
               />
               
             </Container>
-            : <Card className="clear">
+
+              <Card className="clear">
+
                 <Card.Img
                 src={stairs}
+                alt="stairs"
                 />
               </Card>
           }
