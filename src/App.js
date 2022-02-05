@@ -70,7 +70,6 @@ class App extends React.Component {
       })
     }
     this.loadMonster();
-    console.log('this is monsters data', this.state.monsters)
   }
 
 
@@ -83,14 +82,12 @@ class App extends React.Component {
       this.setState({
         monsterData: monster.data,
       })
-      // console.log(this.state.monsterData);
     } catch (error) {
       this.setState({
         renderError: true,
         errorMessage: `Uh Oh Error: ${error.response.status}, ${error.response.data.error}`
       })
     }
-    console.log('this is monsters data', this.state.monsterData)
   }
 
   //Getting list of weapons
@@ -107,7 +104,7 @@ class App extends React.Component {
       })
     }
     this.loadWeapon();
-    console.log('this is weapons data', this.state.weapons)
+
   }
 
   //Generating a random number data via api call
@@ -125,7 +122,6 @@ class App extends React.Component {
         errorMessage: `Uh Oh Error: ${error.response.status}, ${error.response.data.error}`
       })
     }
-    console.log('this is weapon loada data', this.state.weaponData)
   }
 
   //Getting list of spells
@@ -142,7 +138,6 @@ class App extends React.Component {
       })
     }
     this.loadSpell();
-    console.log('this is spells data', this.state.spells)
   }
 
   //Generating a random number data via api call
@@ -160,9 +155,8 @@ class App extends React.Component {
         errorMessage: `Uh Oh Error: ${error.response.status}, ${error.response.data.error}`
       })
     }
-    console.log('this is spell load data', this.state.spellData)
-
   }
+
   //Getting list of classes
   getClasses = async () => {
     try {
@@ -177,7 +171,6 @@ class App extends React.Component {
       })
     }
     this.loadClass();
-    console.log('this is classes data', this.state.classes)
   }
 
   //Generating a random number data via api call
@@ -196,8 +189,6 @@ class App extends React.Component {
         errorMessage: `Uh Oh Error: ${error.response.status}, ${error.response.data.error}`
       })
     }
-    console.log('this is class load data', this.state.classData)
-
   }
 
   //Getting list of races
@@ -214,7 +205,6 @@ class App extends React.Component {
       })
     }
     this.loadRace();
-    console.log('this is races data', this.state.races)
   }
 
   //Generating a random number profile data via api call
@@ -232,8 +222,6 @@ class App extends React.Component {
         errorMessage: `Uh Oh Error: ${error.response.status}, ${error.response.data.error}`
       })
     }
-    console.log('this is race load data', this.state.raceData)
-
   }
 
   //Getting list of languages
@@ -250,7 +238,6 @@ class App extends React.Component {
       })
     }
     this.loadLanguage();
-    console.log('this is languages data', this.state.languages)
   }
 
   //Generating a random number profile data via api call
@@ -268,8 +255,6 @@ class App extends React.Component {
         errorMessage: `Uh Oh Error: ${error.response.status}, ${error.response.data.error}`
       })
     }
-    console.log('this is language load data', this.state.raceData)
-
   }
 
   //Getting list of skills
@@ -286,7 +271,6 @@ class App extends React.Component {
       })
     }
     this.loadSkill();
-    console.log('this is skills data', this.state.skills)
   }
 
   //Generating a random number profile data via api call
@@ -305,8 +289,6 @@ class App extends React.Component {
       })
     }
     loadCounter++;
-    console.log('this is skill load data', this.state.skillData)
-
   }
 
   getAllThings = () => {
@@ -333,7 +315,6 @@ class App extends React.Component {
 
 
   render() {
-    console.log('app state', this.state);
     return (
       <div className='body'>
 
