@@ -263,7 +263,6 @@ class HeroSelector extends React.Component {
       _id: this.state.currentHero._id
 
     }
-    console.log(heroUpdate)
     this.updateHero(heroUpdate);
   }
 
@@ -286,12 +285,10 @@ class HeroSelector extends React.Component {
       health: 25
     }
     this.handleCloseModal();
-    console.log(newHero);
     this.makeHero(newHero);
   }
 
   render() {
-    console.log(imageObject);
 
     let herosToRender = this.state.heros.map((hero, idx) =>
 
